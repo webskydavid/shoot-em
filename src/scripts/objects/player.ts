@@ -7,11 +7,10 @@ export default class Player extends Phaser.GameObjects.Sprite {
   private flip: boolean = false;
   private speed: number = 100;
   private jumpSpeed: number = 300;
-
   // GameObjects
+  bullets: Phaser.GameObjects.Group;
   pointer: Phaser.GameObjects.Rectangle;
   gun: Gun;
-
   // Inputs
   left: Phaser.Input.Keyboard.Key;
   right: Phaser.Input.Keyboard.Key;
@@ -20,8 +19,15 @@ export default class Player extends Phaser.GameObjects.Sprite {
   gunUp: Phaser.Input.Keyboard.Key;
   gunDown: Phaser.Input.Keyboard.Key;
 
-  constructor(scene: Phaser.Scene, x: number, y: number) {
+  constructor(
+    scene: Phaser.Scene,
+    x: number,
+    y: number,
+    bullets: Phaser.GameObjects.Group
+  ) {
     super(scene, x, y, 'player');
+    this.bullets = bullets;
+    this.create();
   }
 
   create() {
@@ -39,7 +45,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.inputs();
 
     // Gun setting
-    this.gun = new Gun(this.scene, x, y);
+    this.gun = new Gun(this.scene, x, y, this.bullets);
 
     this.pointX = x;
     this.pointY = y;
@@ -57,6 +63,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     let {x, y} = this.getCenter();
     let target = Phaser.Math.Angle.Between(x, y, this.pointX, this.pointY);
 
+    this.gun.update();
     this.gun.setPosition(x, y);
     this.gun.setOrigin(0.5, 0.5);
     this.gun.setRotation(target);
@@ -77,6 +84,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
       this.pointX = x - 30;
     }
 
+    // TODO: delete this line
     this.pointer.setPosition(this.pointX, this.pointY);
   }
 

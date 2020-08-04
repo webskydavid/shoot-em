@@ -10,7 +10,6 @@ const config: Phaser.Types.Core.GameConfig = {
     antialias: false,
     pixelArt: true,
   },
-
   scale: {
     parent: 'phaser-game',
     mode: Phaser.Scale.FIT,
@@ -21,7 +20,6 @@ const config: Phaser.Types.Core.GameConfig = {
   scene: [PreloadScene, MainScene],
   physics: {
     default: 'arcade',
-
     arcade: {
       debug: true,
       gravity: {y: GLOBAL_GRAVITY},

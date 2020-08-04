@@ -1,8 +1,10 @@
 import FpsText from '../objects/fpsText';
 import Player from '../objects/player';
 import {SCREEN_WIDTH, SCREEN_HEIGHT} from './../../constants';
+import Bullet from '../objects/bullet';
 
 export default class MainScene extends Phaser.Scene {
+  bullets;
   player: Player;
   fpsText: Phaser.GameObjects.Text;
 
@@ -13,8 +15,15 @@ export default class MainScene extends Phaser.Scene {
   create() {
     this.physics.world.setBounds(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     this.fpsText = new FpsText(this);
-    this.player = new Player(this, 50, 100);
-    this.player.create();
+    this.bullets = this.physics.add.group({
+      frictionX: 10000,
+      frictionY: 10000,
+      dragX: 100,
+      dragY: 100,
+      key: 'bullet',
+      classType: Bullet,
+    });
+    this.player = new Player(this, 50, 100, this.bullets);
 
     // tilemap settings
     let map1 = this.add.tilemap('map1');
@@ -23,7 +32,9 @@ export default class MainScene extends Phaser.Scene {
     let obstacle = map1
       .createStaticLayer('obstacle', [tilemap], 0, 0)
       .setDepth(1);
+
     this.physics.add.collider(this.player, ground);
+    this.physics.add.collider(this.bullets, ground);
     ground.setCollisionByProperty({collide: true});
   }
 
