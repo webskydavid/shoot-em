@@ -1,8 +1,14 @@
 export default class Bullet extends Phaser.GameObjects.Sprite {
   body: Phaser.Physics.Arcade.Body;
 
-  constructor(scene: Phaser.Scene, x: number, y: number) {
-    super(scene, x, y, 'bullet');
+  constructor(
+    scene: Phaser.Scene,
+    x: number,
+    y: number,
+    key: string,
+    frame?: number
+  ) {
+    super(scene, x, y, key);
     this.create();
   }
 

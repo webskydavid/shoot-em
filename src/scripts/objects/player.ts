@@ -8,7 +8,6 @@ export default class Player extends Phaser.GameObjects.Sprite {
   private speed: number = 100;
   private jumpSpeed: number = 300;
   // GameObjects
-  bullets: Phaser.GameObjects.Group;
   pointer: Phaser.GameObjects.Rectangle;
   gun: Gun;
   // Inputs
@@ -19,14 +18,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
   gunUp: Phaser.Input.Keyboard.Key;
   gunDown: Phaser.Input.Keyboard.Key;
 
-  constructor(
-    scene: Phaser.Scene,
-    x: number,
-    y: number,
-    bullets: Phaser.GameObjects.Group
-  ) {
+  constructor(scene: Phaser.Scene, x: number, y: number) {
     super(scene, x, y, 'player');
-    this.bullets = bullets;
     this.create();
   }
 
@@ -45,7 +38,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.inputs();
 
     // Gun setting
-    this.gun = new Gun(this.scene, x, y, this.bullets);
+    this.gun = new Gun(this.scene, x, y);
 
     this.pointX = x;
     this.pointY = y;
