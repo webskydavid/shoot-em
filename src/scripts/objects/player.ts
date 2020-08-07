@@ -40,9 +40,9 @@ export default class Player extends Phaser.GameObjects.Sprite {
     // Gun setting
     this.gun = new Gun(this.scene, x, y);
 
-    this.pointX = x;
-    this.pointY = y;
-    this.pointer = this.scene.add.rectangle(x, y, 10, 10, 100);
+    this.pointX = 0;
+    this.pointY = 0;
+    this.pointer = this.scene.add.rectangle(0, 0, 10, 10, 100);
     this.pointer.setVisible(false);
   }
 
@@ -54,7 +54,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
   private gunControl() {
     let {x, y} = this.getCenter();
-    let target = Phaser.Math.Angle.Between(x, y, this.pointX, this.pointY);
+    let target = Phaser.Math.Angle.Between(x, y, this.pointX, this.pointY + y);
 
     this.gun.update();
     this.gun.setPosition(x, y);
@@ -78,7 +78,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     }
 
     // TODO: delete this line
-    this.pointer.setPosition(this.pointX, this.pointY);
+    this.pointer.setPosition(this.pointX, this.pointY + y);
   }
 
   private playerControl() {
