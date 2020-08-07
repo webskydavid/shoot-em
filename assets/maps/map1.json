@@ -1,4 +1,11 @@
 { "compressionlevel":-1,
+ "editorsettings":
+    {
+     "export":
+        {
+         "target":"."
+        }
+    },
  "height":10,
  "infinite":false,
  "layers":[
@@ -82,6 +89,19 @@
                          "value":true
                         }]
                 }],
+         "tilewidth":16
+        }, 
+        {
+         "columns":2,
+         "firstgid":61,
+         "image":"..\/img\/smoke.png",
+         "imageheight":32,
+         "imagewidth":32,
+         "margin":0,
+         "name":"smoke",
+         "spacing":0,
+         "tilecount":4,
+         "tileheight":16,
          "tilewidth":16
         }],
  "tilewidth":16,
