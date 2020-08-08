@@ -8,7 +8,6 @@ export default class Rock extends Phaser.GameObjects.Sprite {
   }
 
   create() {
-    //console.log('Log: [create]');
     this.particles = this.scene.add.particles('smoke');
 
     var emitter = this.particles.createEmitter({
@@ -16,7 +15,7 @@ export default class Rock extends Phaser.GameObjects.Sprite {
       maxParticles: 15,
       rotate: <any>{
         onEmit: (particle, key, t, value) => {
-          return this.body.speed * 1;
+          return this.body.speed * 5;
         },
       },
       speed: <any>{
